@@ -3,7 +3,6 @@ import { db } from '../config/db';
 import { user } from '../config/db/schema';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
 import { UserRepositoryInterface } from '../interfaces/userRepositoryInterface';
-import { CanBeUndefined } from '../types';
 import { User } from '../types/user';
 
 export class UserRepository implements UserRepositoryInterface<User> {
@@ -13,7 +12,7 @@ export class UserRepository implements UserRepositoryInterface<User> {
 		});
 	}
 
-	async getUserById(id: string): Promise<CanBeUndefined<User>> {
+	async getUserById(id: string) {
 		return tryCatchHelper(async () => {
 			const user = await db.query.user.findFirst({
 				where: (user) => eq(user.id, id),
@@ -26,6 +25,8 @@ export class UserRepository implements UserRepositoryInterface<User> {
 			if (user && user.isActive !== true) {
 				throw new Error('User is not active');
 			}
+
+			if (!user) throw new Error('User not found');
 
 			return user;
 		});

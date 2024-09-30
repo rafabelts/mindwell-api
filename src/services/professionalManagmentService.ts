@@ -1,6 +1,7 @@
 import { RepositoryFactory } from '../factories/repositoryFactory';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
 import { ProfessionalManagmentInterface } from '../interfaces/professionalManagmentInterface';
+import { PsychologistRepository } from '../repositories/psychologistRepository';
 import { AvailabilityInfo } from '../types/user';
 
 export class ProfessionalManagmentService {
@@ -17,6 +18,13 @@ export class ProfessionalManagmentService {
 		return tryCatchHelper(async () => {
 			if (!institutionId) throw new Error('Institution ID is missing');
 			if (!psychologistId) throw new Error('Psychologist ID is missing');
+
+			const psychologistRepository = new PsychologistRepository();
+			const psychologistData =
+				psychologistRepository.getUserById(psychologistId);
+
+			if (!psychologistData)
+				throw new Error('Error. Psychologist ID not belongs to a psychologist');
 
 			await this.repository.addPsychologistToInstitution(
 				institutionId,

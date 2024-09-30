@@ -17,6 +17,8 @@ export class PsychologistRepository
 {
 	async addUser(userData: Psychologist) {
 		return tryCatchHelper(async () => {
+			if (!userData.schedule) throw new Error('Schedule is missing');
+
 			await db.insert(psychologist).values({
 				id: userData.id,
 				university: userData.university,
@@ -25,8 +27,6 @@ export class PsychologistRepository
 				description: userData.description,
 				address: userData.address ?? '',
 			});
-
-			if (!userData.schedule) throw new Error('Schedule is missing');
 
 			const schedulePromises = userData.schedule.map((scheduleInfo) =>
 				db.insert(scheduleAvailable).values({
@@ -41,7 +41,7 @@ export class PsychologistRepository
 		});
 	}
 
-	async getUserById(id: string): Promise<CanBeUndefined<Psychologist>> {
+	async getUserById(id: string) {
 		return tryCatchHelper(async () => {
 			const psychologistData = await db
 				.select({
@@ -62,6 +62,8 @@ export class PsychologistRepository
 				.leftJoin(user, eq(user.id, psychologist.id))
 				.where(eq(user.id, id));
 
+			if (!psychologistData[0]) throw new Error('Psychologist data not found');
+
 			if (psychologistData[0] && psychologistData[0].isActive !== true) {
 				throw new Error('The account is no longer active');
 			}
@@ -69,6 +71,8 @@ export class PsychologistRepository
 			const schedule = await db.query.scheduleAvailable.findMany({
 				where: (model, { eq }) => eq(model.psychologistId, id),
 			});
+
+			if (!schedule) throw new Error('Schedule data not found');
 
 			const institutions = await db
 				.select({
@@ -87,17 +91,23 @@ export class PsychologistRepository
 				.leftJoin(user, eq(user.id, institution.id))
 				.where(eq(psychologistInstitution.psychologistId, id));
 
-			return {
+			if (!institutions) throw new Error('Institution data not found');
+
+			const fullPsychologistData = {
 				...psychologistData[0],
 				schedule: schedule.filter((schedule) => schedule.isActive === true),
 				institutions: institutions.filter(
 					(institution) => institution.isActive === true
 				),
-			} as CanBeUndefined<Psychologist>;
+			};
+
+			if (!fullPsychologistData) throw new Error('Psychologist data not found');
+
+			return fullPsychologistData as Psychologist;
 		});
 	}
 
-	async getAllUsers(): Promise<Array<CanBeUndefined<Psychologist>>> {
+	async getAllUsers() {
 		const psychologistData = await db
 			.select({
 				id: user.id,
@@ -117,12 +127,16 @@ export class PsychologistRepository
 			.leftJoin(user, eq(user.id, psychologist.id))
 			.where(eq(user.isActive, true));
 
+		if (!psychologistData) throw new Error('Schedule data not found');
+
 		const psychologistsWithExtraData = await Promise.all(
 			psychologistData.map(async (psychologist) => {
 				const schedule = await db.query.scheduleAvailable.findMany({
 					where: (model, { eq }) =>
 						eq(model.psychologistId, psychologist.id ?? ''),
 				});
+
+				if (!schedule) throw new Error('Schedule data not found');
 
 				const institutions = await db
 					.select({
@@ -143,6 +157,8 @@ export class PsychologistRepository
 					)
 					.leftJoin(user, eq(user.id, institution.id));
 
+				if (!institutions) throw new Error('Institution data not found');
+
 				return {
 					...psychologist,
 					schedule: schedule.filter((schedule) => schedule.isActive === true),
@@ -153,7 +169,10 @@ export class PsychologistRepository
 			})
 		);
 
-		return psychologistsWithExtraData as Array<CanBeUndefined<Psychologist>>;
+		if (!psychologistsWithExtraData)
+			throw new Error('Psychologist with extra data not found');
+
+		return psychologistsWithExtraData as Array<Psychologist>;
 	}
 
 	async updateUser(id: string, user: Psychologist) {}

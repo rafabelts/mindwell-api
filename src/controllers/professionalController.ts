@@ -4,8 +4,8 @@ import { ProfessionalManagmentService } from '../services/professionalManagmentS
 export class ProfessionalManagmentController {
 	private professionalManagmentService: ProfessionalManagmentService;
 
-	constructor(professionalManagmentService: ProfessionalManagmentService) {
-		this.professionalManagmentService = professionalManagmentService;
+	constructor(service: ProfessionalManagmentService) {
+		this.professionalManagmentService = service;
 	}
 
 	async addPsychologistToInstitution(req: Request, res: Response) {

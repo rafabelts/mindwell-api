@@ -6,11 +6,9 @@ export interface UserRepositoryInterface<
 > {
 	addUser: (userData: T) => void;
 
-	getUserById: (
-		id: string
-	) => Promise<CanBeUndefined<T> | Array<CanBeUndefined<T>>>;
+	getUserById: (id: string) => Promise<T | Array<T>>;
 
-	getAllUsers?: () => Promise<Array<CanBeUndefined<T>>>;
+	getAllUsers?: () => Promise<Array<T>>;
 
 	updateUser: (id: string, userData: T) => void;
 

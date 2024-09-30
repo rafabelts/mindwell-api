@@ -82,9 +82,11 @@ export const emotionalRecord = sqliteTable('EmotionalRecord', {
 		.default(sql`(CURRENT_TIMESTAMP)`)
 		.notNull(),
 	emotion: text('emotion').notNull(),
+	description: text('description'),
 	userId: text('user_id')
 		.references(() => user.id)
 		.notNull(),
+	isActive: integer('is_active', { mode: 'boolean' }).default(true).notNull(),
 });
 
 export const appointment = sqliteTable('Appointment', {

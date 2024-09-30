@@ -20,7 +20,7 @@ export class InstitutionRepository
 		});
 	}
 
-	async getUserById(id: string): Promise<Array<CanBeUndefined<Institution>>> {
+	async getUserById(id: string) {
 		return tryCatchHelper(async () => {
 			const institutionData = await db
 				.select({
@@ -38,11 +38,13 @@ export class InstitutionRepository
 				.leftJoin(user, eq(user.id, institution.id))
 				.where(eq(user.id, id));
 
-			return institutionData as Array<CanBeUndefined<Institution>>;
+			if (!institutionData) throw new Error('No institution data found');
+
+			return institutionData as Array<Institution>;
 		});
 	}
 
-	async getAllUsers(): Promise<Array<CanBeUndefined<Institution>>> {
+	async getAllUsers() {
 		return tryCatchHelper(async () => {
 			const institutionData = await db
 				.select({
@@ -59,7 +61,9 @@ export class InstitutionRepository
 				.leftJoin(user, eq(user.id, institution.id))
 				.where(eq(user.isActive, true));
 
-			return institutionData as Array<CanBeUndefined<Institution>>;
+			if (!institutionData) throw new Error('No institution data found');
+
+			return institutionData as Array<Institution>;
 		});
 	}
 

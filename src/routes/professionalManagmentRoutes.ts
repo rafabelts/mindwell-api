@@ -15,8 +15,8 @@ router.post(
 	)
 );
 
-router.get(
-	'/institution/delete/:id',
+router.delete(
+	'/institution/:id',
 	professionalManagmentController.deletePsychologistFromInstitution.bind(
 		professionalManagmentController
 	)
@@ -36,8 +36,8 @@ router.post(
 	)
 );
 
-router.get(
-	'/schedule/delete/:id',
+router.delete(
+	'/schedule/:id',
 	professionalManagmentController.deleteSchedule.bind(
 		professionalManagmentController
 	)

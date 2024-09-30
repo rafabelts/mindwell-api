@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 export class AppointmentController {
 	private appointmentService: AppointmentService;
 
-	constructor(appointmentService: AppointmentService) {
-		this.appointmentService = appointmentService;
+	constructor(service: AppointmentService) {
+		this.appointmentService = service;
 	}
 
 	async addAppointment(req: Request, res: Response) {

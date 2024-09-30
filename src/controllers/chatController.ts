@@ -4,8 +4,8 @@ import { ChatService } from '../services/chatService';
 export class ChatController {
 	private chatService: ChatService;
 
-	constructor(chatService: ChatService) {
-		this.chatService = chatService;
+	constructor(service: ChatService) {
+		this.chatService = service;
 	}
 
 	async addChat(req: Request, res: Response) {

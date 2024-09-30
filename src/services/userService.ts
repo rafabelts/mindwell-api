@@ -12,6 +12,7 @@ export class UserService {
 		userData: User | Psychologist | Institution
 	) {
 		return tryCatchHelper(async () => {
+			if (!userData) throw new Error('User data is missing');
 			const repository = RepositoryFactory.getRepository(type);
 			const user = UserFactory.createUser(type, userData);
 
@@ -21,6 +22,8 @@ export class UserService {
 
 	async getUserById(id: string) {
 		return tryCatchHelper(async () => {
+			if (!id) throw new Error('User Id is missing');
+
 			const userRepository = new UserRepository();
 			const psychologistRepository = new PsychologistRepository();
 			const institutionRepository = new InstitutionRepository();

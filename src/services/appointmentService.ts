@@ -1,6 +1,7 @@
 import { RepositoryFactory } from '../factories/repositoryFactory';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
 import { AppointmentRepositoryInterface } from '../interfaces/appointmentRepositoryInterface';
+import { PsychologistRepository } from '../repositories/psychologistRepository';
 import { Appointment } from '../types/appointment';
 
 export class AppointmentService {
@@ -13,12 +14,24 @@ export class AppointmentService {
 	async addAppointment(data: Appointment) {
 		return tryCatchHelper(async () => {
 			if (!data) throw new Error('Appointment data is missing');
+
+			const psychologistRepository = new PsychologistRepository();
+			const psychologistData = psychologistRepository.getUserById(
+				data.psychologistId
+			);
+
+			if (!psychologistData)
+				throw new Error('Error. Psychologist ID not belongs to a psychologist');
+
 			await this.repository.addAppointment(data);
 		});
 	}
 
 	async getAppointments(id: string, type: 'user' | 'psychologist') {
 		return tryCatchHelper(async () => {
+			if (!id) throw new Error('User id is missing');
+			if (!type) throw new Error('Type is missing');
+
 			const appointments = await this.repository.getAppointments(id, type);
 
 			if (!appointments) throw new Error('No appointments found');
@@ -41,6 +54,9 @@ export class AppointmentService {
 
 	async rescheduleAppointment(id: number, date: string) {
 		return tryCatchHelper(async () => {
+			if (!id) throw new Error('Appointment id is missing');
+			if (!date) throw new Error('Date is missing');
+
 			const originalAppointment = await this.repository.getAppointmentById(id);
 
 			if (!originalAppointment)

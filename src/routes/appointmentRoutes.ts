@@ -9,21 +9,19 @@ const appointmentController = new AppointmentController(
 );
 
 router.post(
-	'/add',
+	'/',
 	appointmentController.addAppointment.bind(appointmentController)
 );
 
-router.get('/all', (req, res) =>
-	appointmentController.getAppointments(req, res)
-);
+router.get('/', (req, res) => appointmentController.getAppointments(req, res));
 
 router.get(
 	'/:id',
 	appointmentController.getAppointmentById.bind(appointmentController)
 );
 
-router.post(
-	'/reschedule',
+router.put(
+	'/',
 	appointmentController.rescheduleAppointment.bind(appointmentController)
 );
 

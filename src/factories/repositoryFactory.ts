@@ -1,6 +1,7 @@
 // Interfaces
 import { AppointmentRepositoryInterface } from '../interfaces/appointmentRepositoryInterface';
 import { ChatRepositoryInterface } from '../interfaces/chatRepositoryInterface';
+import { EmotionalRecordRepositoryInterface } from '../interfaces/emotionalRecordRepositoryInterface';
 import { ProfessionalManagmentInterface } from '../interfaces/professionalManagmentInterface';
 import { ReviewRepositoryInterface } from '../interfaces/reviewRepositoryInterface';
 import { UserRepositoryInterface } from '../interfaces/userRepositoryInterface';
@@ -8,6 +9,7 @@ import { UserRepositoryInterface } from '../interfaces/userRepositoryInterface';
 // Repositories
 import { AppointmentRepository } from '../repositories/appointmentRepository';
 import { ChatRepository } from '../repositories/chatRepository';
+import { EmotionalRecordRepository } from '../repositories/emotionalRecordRepository';
 import { InstitutionRepository } from '../repositories/institutionRepository';
 import { ProfessionalManagmentRepository } from '../repositories/professionalManagmentRepository';
 import { PsychologistRepository } from '../repositories/psychologistRepository';
@@ -32,6 +34,10 @@ export class RepositoryFactory {
 	static getRepository(type: 'chat'): ChatRepositoryInterface;
 
 	static getRepository(
+		type: 'emotionalRecord'
+	): EmotionalRecordRepositoryInterface;
+
+	static getRepository(
 		type:
 			| 'user'
 			| 'psychologist'
@@ -40,12 +46,14 @@ export class RepositoryFactory {
 			| 'review'
 			| 'professionalManagment'
 			| 'chat'
+			| 'emotionalRecord'
 	):
 		| UserRepositoryInterface<any>
 		| AppointmentRepositoryInterface
 		| ReviewRepositoryInterface
 		| ProfessionalManagmentInterface
-		| ChatRepositoryInterface {
+		| ChatRepositoryInterface
+		| EmotionalRecordRepositoryInterface {
 		switch (type) {
 			case 'user':
 				return new UserRepository();
@@ -65,6 +73,9 @@ export class RepositoryFactory {
 
 			case 'chat':
 				return new ChatRepository();
+
+			case 'emotionalRecord':
+				return new EmotionalRecordRepository();
 
 			default:
 				throw new Error('No repository found');

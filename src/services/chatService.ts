@@ -1,6 +1,7 @@
 import { RepositoryFactory } from '../factories/repositoryFactory';
 import { ChatRepositoryInterface } from '../interfaces/chatRepositoryInterface';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
+import { PsychologistRepository } from '../repositories/psychologistRepository';
 
 export class ChatService {
 	private repository: ChatRepositoryInterface;
@@ -13,6 +14,13 @@ export class ChatService {
 		return tryCatchHelper(async () => {
 			if (!userId) throw new Error('User ID is missing');
 			if (!psychologistId) throw new Error('Psychologist ID is missing');
+
+			const psychologistRepository = new PsychologistRepository();
+			const psychologistData =
+				psychologistRepository.getUserById(psychologistId);
+
+			if (!psychologistData)
+				throw new Error('Error. Psychologist ID not belongs to a psychologist');
 
 			await this.repository.addChat(userId, psychologistId);
 		});

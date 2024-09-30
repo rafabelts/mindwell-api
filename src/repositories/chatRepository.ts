@@ -56,6 +56,8 @@ export class ChatRepository implements ChatRepositoryInterface {
 				})
 			);
 
+			if (!messageWithUserName) throw new Error('No messages found');
+
 			return messageWithUserName;
 		});
 	}

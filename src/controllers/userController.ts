@@ -4,8 +4,8 @@ import { UserService } from '../services/userService';
 export class UserController {
 	private userService: UserService;
 
-	constructor(userService: UserService) {
-		this.userService = userService;
+	constructor(service: UserService) {
+		this.userService = service;
 	}
 
 	async addUser(req: Request, res: Response) {
