@@ -15,7 +15,7 @@ router.post(
 	)
 );
 
-router.post(
+router.get(
 	'/institution/delete/:id',
 	professionalManagmentController.deletePsychologistFromInstitution.bind(
 		professionalManagmentController
@@ -36,9 +36,11 @@ router.post(
 	)
 );
 
-router.post(
-	'/schedule/:id',
+router.get(
+	'/schedule/delete/:id',
 	professionalManagmentController.deleteSchedule.bind(
 		professionalManagmentController
 	)
 );
+
+export default router;

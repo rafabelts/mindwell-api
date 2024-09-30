@@ -26,12 +26,15 @@ export class PsychologistRepository
 				address: userData.address ?? '',
 			});
 
-			if (userData.schedule.length <= 0) throw new Error('Schedule is missing');
+			if (!userData.schedule) throw new Error('Schedule is missing');
 
 			const schedulePromises = userData.schedule.map((scheduleInfo) =>
-				db
-					.insert(scheduleAvailable)
-					.values({ ...scheduleInfo, psychologistId: userData.id })
+				db.insert(scheduleAvailable).values({
+					day: scheduleInfo.day,
+					startTime: scheduleInfo.startTime,
+					endTime: scheduleInfo.endTime,
+					psychologistId: userData.id,
+				})
 			);
 
 			await Promise.all(schedulePromises);
@@ -59,13 +62,10 @@ export class PsychologistRepository
 				.leftJoin(user, eq(user.id, psychologist.id))
 				.where(eq(user.id, id));
 
-			if (!psychologistData || psychologistData.length === 0) {
-				throw new Error('Psychologist not found');
-			}
-
-			if (psychologistData[0].isActive !== true) {
+			if (psychologistData[0] && psychologistData[0].isActive !== true) {
 				throw new Error('The account is no longer active');
 			}
+
 			const schedule = await db.query.scheduleAvailable.findMany({
 				where: (model, { eq }) => eq(model.psychologistId, id),
 			});

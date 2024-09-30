@@ -29,7 +29,6 @@ export class ProfessionalManagmentRepository
 	async editPsychologistInstitutionStatus(id: number, status: boolean) {
 		return tryCatchHelper(async () => {
 			if (!id) throw new Error('ID is missing');
-			if (!status) throw new Error('Status is missing');
 
 			await db
 				.update(psychologistInstitution)

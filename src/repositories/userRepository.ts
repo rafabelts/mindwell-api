@@ -18,11 +18,12 @@ export class UserRepository implements UserRepositoryInterface<User> {
 			const user = await db.query.user.findFirst({
 				where: (user) => eq(user.id, id),
 			});
+
 			if (!user) {
 				throw new Error('Not user found');
 			}
 
-			if (user.isActive !== true) {
+			if (user && user.isActive !== true) {
 				throw new Error('User is not active');
 			}
 

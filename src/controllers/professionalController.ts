@@ -54,9 +54,8 @@ export class ProfessionalManagmentController {
 
 	async addSchedule(req: Request, res: Response) {
 		try {
-			const { id, scheduleInfo } = req.body;
+			const { scheduleInfo } = req.body;
 
-			if (!id) return res.status(400).json({ message: 'ID is missing' });
 			if (!scheduleInfo)
 				return res.status(400).json({ message: 'Schedule info is missing' });
 

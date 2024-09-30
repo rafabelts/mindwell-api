@@ -1,8 +1,13 @@
+// Interfaces
 import { AppointmentRepositoryInterface } from '../interfaces/AppointmentRepositoryInterface';
+import { ChatRepositoryInterface } from '../interfaces/chatRepositoryInterface';
 import { ProfessionalManagmentInterface } from '../interfaces/ProfessionalManagmentInterface';
 import { ReviewRepositoryInterface } from '../interfaces/ReviewRepositoryInterface';
 import { UserRepositoryInterface } from '../interfaces/UserRepositoryInterface';
+
+// Repositories
 import { AppointmentRepository } from '../repositories/appointmentRepository';
+import { ChatRepository } from '../repositories/chatRepository';
 import { InstitutionRepository } from '../repositories/InstitutionRepository';
 import { ProfessionalManagmentRepository } from '../repositories/professionalManagmentRepository';
 import { PsychologistRepository } from '../repositories/PsychologistRepository';
@@ -24,6 +29,8 @@ export class RepositoryFactory {
 		type: 'professionalManagment'
 	): ProfessionalManagmentInterface;
 
+	static getRepository(type: 'chat'): ChatRepositoryInterface;
+
 	static getRepository(
 		type:
 			| 'user'
@@ -32,11 +39,13 @@ export class RepositoryFactory {
 			| 'appointment'
 			| 'review'
 			| 'professionalManagment'
+			| 'chat'
 	):
 		| UserRepositoryInterface<any>
 		| AppointmentRepositoryInterface
 		| ReviewRepositoryInterface
-		| ProfessionalManagmentInterface {
+		| ProfessionalManagmentInterface
+		| ChatRepositoryInterface {
 		switch (type) {
 			case 'user':
 				return new UserRepository();
@@ -53,6 +62,9 @@ export class RepositoryFactory {
 
 			case 'professionalManagment':
 				return new ProfessionalManagmentRepository();
+
+			case 'chat':
+				return new ChatRepository();
 
 			default:
 				throw new Error('No repository found');

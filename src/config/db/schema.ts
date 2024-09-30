@@ -16,7 +16,7 @@ import { log } from 'console';
 export const user = sqliteTable('User', {
 	id: text('id').primaryKey(),
 	name: text('name').notNull(),
-	email: text('email').notNull(),
+	email: text('email').notNull().unique(),
 	photoUrl: text('photo_url'),
 	isActive: integer('is_active', { mode: 'boolean' }).default(true).notNull(),
 	isMember: integer('is_active', { mode: 'boolean' }).notNull(),
@@ -115,7 +115,6 @@ export const review = sqliteTable('Review', {
 
 export const chat = sqliteTable('Chat', {
 	id: integer('id').primaryKey().notNull(),
-	name: text('name').notNull(),
 	userId: text('user_id').references(() => user.id),
 	psychologistId: text('psychologist_id')
 		.references(() => psychologist.id)
@@ -128,7 +127,7 @@ export const message = sqliteTable('Message', {
 	date: text('date')
 		.default(sql`(CURRENT_TIMESTAMP)`)
 		.notNull(),
-	chatId: text('chat_id')
+	chatId: integer('chat_id')
 		.references(() => chat.id)
 		.notNull(),
 	senderId: text('sender_id')

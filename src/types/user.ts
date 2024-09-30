@@ -18,7 +18,7 @@ export type AvailabilityInfo = {
 	psychologistId: string;
 };
 
-export interface Psychologist {
+export type Psychologist = {
 	id: string;
 	university: string;
 	professionalId: string; // Cedula del psicoloco
@@ -28,11 +28,11 @@ export interface Psychologist {
 	address: string;
 	schedule: Array<AvailabilityInfo>;
 	institutions: Array<Institution>;
-}
+};
 
-export interface Institution {
+export type Institution = {
 	id: string;
 	address: string;
 	latitude: string;
 	length: string;
-}
+};

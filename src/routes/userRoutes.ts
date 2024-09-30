@@ -8,7 +8,7 @@ const userController = new UserController(new UserService());
 
 router.post('/add', userController.addUser.bind(userController));
 
-router.get('/get', (req, res) => userController.getUserById(req, res));
+router.get('/:id', userController.getUserById.bind(userController));
 
 router.get('/all/:type', userController.getAllUsers.bind(userController));
 

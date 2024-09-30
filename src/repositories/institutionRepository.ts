@@ -38,14 +38,6 @@ export class InstitutionRepository
 				.leftJoin(user, eq(user.id, institution.id))
 				.where(eq(user.id, id));
 
-			if (!institutionData || institutionData.length === 0) {
-				throw new Error('Not institution found');
-			}
-
-			if (institutionData[0].isActive !== true) {
-				throw new Error('User is not active');
-			}
-
 			return institutionData as Array<CanBeUndefined<Institution>>;
 		});
 	}

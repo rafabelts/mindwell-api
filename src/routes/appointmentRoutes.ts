@@ -9,16 +9,16 @@ const appointmentController = new AppointmentController(
 );
 
 router.post(
-	'/generate',
+	'/add',
 	appointmentController.addAppointment.bind(appointmentController)
 );
 
-router.get('/get', (req, res) =>
+router.get('/all', (req, res) =>
 	appointmentController.getAppointments(req, res)
 );
 
 router.get(
-	'/get/:id',
+	'/:id',
 	appointmentController.getAppointmentById.bind(appointmentController)
 );
 

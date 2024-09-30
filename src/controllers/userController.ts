@@ -29,7 +29,7 @@ export class UserController {
 
 	async getUserById(req: Request, res: Response) {
 		try {
-			const { id } = req.query;
+			const { id } = req.params;
 
 			if (!id) return res.status(400).json({ message: 'Id is required' });
 

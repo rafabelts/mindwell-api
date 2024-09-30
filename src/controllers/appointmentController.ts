@@ -35,11 +35,11 @@ export class AppointmentController {
 	async getAppointments(req: Request, res: Response) {
 		try {
 			// id is userId
-			const { type, id } = req.query;
+			const { id, type } = req.query;
 
+			if (!id) return res.status(400).json({ message: 'User ID is missing' });
 			if (!type)
 				return res.status(400).json({ message: 'User type is missing' });
-			if (!id) return res.status(400).json({ message: 'User ID is missing' });
 
 			const appointments = await this.appointmentService.getAppointments(
 				id as string,
