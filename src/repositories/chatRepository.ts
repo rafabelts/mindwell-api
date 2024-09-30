@@ -1,6 +1,3 @@
-/*
- */
-
 import { db } from '../config/db';
 import { chat, message } from '../config/db/schema';
 import { ChatRepositoryInterface } from '../interfaces/chatRepositoryInterface';

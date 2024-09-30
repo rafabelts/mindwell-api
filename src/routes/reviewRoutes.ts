@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { ReviewController } from '../controllers/ReviewController';
-import { ReviewService } from '../services/ReviewService';
+import { ReviewController } from '../controllers/reviewController';
+import { ReviewService } from '../services/reviewService';
 
 const router = Router();
 const reviewController = new ReviewController(new ReviewService());

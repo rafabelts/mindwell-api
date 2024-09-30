@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var professionalManagmentService_1 = require("../services/professionalManagmentService");
+var professionalController_1 = require("../controllers/professionalController");
+var router = (0, express_1.Router)();
+var professionalManagmentController = new professionalController_1.ProfessionalManagmentController(new professionalManagmentService_1.ProfessionalManagmentService());
+router.post('/institution/add', professionalManagmentController.addPsychologistToInstitution.bind(professionalManagmentController));
+router.get('/institution/delete/:id', professionalManagmentController.deletePsychologistFromInstitution.bind(professionalManagmentController));
+router.post('/schedule/add', professionalManagmentController.addSchedule.bind(professionalManagmentController));
+router.post('/schedule/edit', professionalManagmentController.editSchedule.bind(professionalManagmentController));
+router.get('/schedule/delete/:id', professionalManagmentController.deleteSchedule.bind(professionalManagmentController));
+exports.default = router;

@@ -1,5 +1,4 @@
 import { AvailabilityInfo, Institution, Psychologist } from '../types/user';
-import { UserModel } from './User';
 
 export class PsychologistModel {
 	private id: string;

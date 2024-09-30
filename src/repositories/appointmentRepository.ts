@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../config/db';
 import { appointment } from '../config/db/schema';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { AppointmentRepositoryInterface } from '../interfaces/AppointmentRepositoryInterface';
+import { AppointmentRepositoryInterface } from '../interfaces/appointmentRepositoryInterface';
 import { Appointment } from '../types/appointment';
 
 export class AppointmentRepository implements AppointmentRepositoryInterface {

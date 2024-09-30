@@ -1,11 +1,11 @@
-import { eq, ne } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { db } from '../config/db';
 import {
 	psychologistInstitution,
 	scheduleAvailable,
 } from '../config/db/schema';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { ProfessionalManagmentInterface } from '../interfaces/ProfessionalManagmentInterface';
+import { ProfessionalManagmentInterface } from '../interfaces/professionalManagmentInterface';
 import { AvailabilityInfo } from '../types/user';
 
 export class ProfessionalManagmentRepository

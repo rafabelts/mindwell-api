@@ -1,6 +1,6 @@
 import { RepositoryFactory } from '../factories/repositoryFactory';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { AppointmentRepositoryInterface } from '../interfaces/AppointmentRepositoryInterface';
+import { AppointmentRepositoryInterface } from '../interfaces/appointmentRepositoryInterface';
 import { Appointment } from '../types/appointment';
 
 export class AppointmentService {

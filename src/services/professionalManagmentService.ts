@@ -1,6 +1,6 @@
 import { RepositoryFactory } from '../factories/repositoryFactory';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { ProfessionalManagmentInterface } from '../interfaces/ProfessionalManagmentInterface';
+import { ProfessionalManagmentInterface } from '../interfaces/professionalManagmentInterface';
 import { AvailabilityInfo } from '../types/user';
 
 export class ProfessionalManagmentService {

@@ -1,18 +1,18 @@
 // Interfaces
-import { AppointmentRepositoryInterface } from '../interfaces/AppointmentRepositoryInterface';
+import { AppointmentRepositoryInterface } from '../interfaces/appointmentRepositoryInterface';
 import { ChatRepositoryInterface } from '../interfaces/chatRepositoryInterface';
-import { ProfessionalManagmentInterface } from '../interfaces/ProfessionalManagmentInterface';
-import { ReviewRepositoryInterface } from '../interfaces/ReviewRepositoryInterface';
-import { UserRepositoryInterface } from '../interfaces/UserRepositoryInterface';
+import { ProfessionalManagmentInterface } from '../interfaces/professionalManagmentInterface';
+import { ReviewRepositoryInterface } from '../interfaces/reviewRepositoryInterface';
+import { UserRepositoryInterface } from '../interfaces/userRepositoryInterface';
 
 // Repositories
 import { AppointmentRepository } from '../repositories/appointmentRepository';
 import { ChatRepository } from '../repositories/chatRepository';
-import { InstitutionRepository } from '../repositories/InstitutionRepository';
+import { InstitutionRepository } from '../repositories/institutionRepository';
 import { ProfessionalManagmentRepository } from '../repositories/professionalManagmentRepository';
-import { PsychologistRepository } from '../repositories/PsychologistRepository';
+import { PsychologistRepository } from '../repositories/psychologistRepository';
 import { ReviewRepository } from '../repositories/reviewRepository';
-import { UserRepository } from '../repositories/UserRepository';
+import { UserRepository } from '../repositories/userRepository';
 
 export class RepositoryFactory {
 	// Overload for getting the right repository

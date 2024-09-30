@@ -1,6 +1,6 @@
 import { RepositoryFactory } from '../factories/repositoryFactory';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { ReviewRepositoryInterface } from '../interfaces/ReviewRepositoryInterface';
+import { ReviewRepositoryInterface } from '../interfaces/reviewRepositoryInterface';
 import { Review } from '../types/review';
 
 export class ReviewService {

@@ -1,5 +1,4 @@
 import { Institution } from '../types/user';
-import { UserModel } from './User';
 
 export class InstitutionModel {
 	private id: string;

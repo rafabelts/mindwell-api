@@ -1,6 +1,6 @@
 import { db } from '../config/db';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { ReviewRepositoryInterface } from '../interfaces/ReviewRepositoryInterface';
+import { ReviewRepositoryInterface } from '../interfaces/reviewRepositoryInterface';
 import { Review } from '../types/review';
 import { appointment, review, user } from '../config/db/schema';
 import { eq } from 'drizzle-orm';

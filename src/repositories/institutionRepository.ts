@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '../config/db';
 import { institution, user } from '../config/db/schema';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { UserRepositoryInterface } from '../interfaces/UserRepositoryInterface';
+import { UserRepositoryInterface } from '../interfaces/userRepositoryInterface';
 import { CanBeUndefined } from '../types';
 import { Institution } from '../types/user';
 

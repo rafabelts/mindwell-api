@@ -1,4 +1,5 @@
 import { CanBeNull } from '.';
+
 export type Appointment = {
 	id: CanBeNull<number>;
 	date: string;

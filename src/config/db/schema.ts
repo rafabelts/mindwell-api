@@ -1,7 +1,5 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 import { sql } from 'drizzle-orm';
-import { char } from 'drizzle-orm/mysql-core';
-import { log } from 'console';
 
 /*
     las tablas se crean como objetos para posteriormente acceder a ellas como queries

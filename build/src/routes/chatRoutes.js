@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var chatController_1 = require("../controllers/chatController");
+var chatService_1 = require("../services/chatService");
+var router = (0, express_1.Router)();
+var chatController = new chatController_1.ChatController(new chatService_1.ChatService());
+router.post('/', function (req, res) { return chatController.addChat(req, res); });
+router.post('/message', chatController.addMessage.bind(chatController));
+router.get('/message/:chatId', chatController.getMessages.bind(chatController));
+exports.default = router;

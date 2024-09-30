@@ -7,7 +7,7 @@ import {
 	user,
 } from '../config/db/schema';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { UserRepositoryInterface } from '../interfaces/UserRepositoryInterface';
+import { UserRepositoryInterface } from '../interfaces/userRepositoryInterface';
 import { CanBeUndefined } from '../types';
 import { Psychologist } from '../types/user';
 import { eq } from 'drizzle-orm';

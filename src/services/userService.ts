@@ -1,11 +1,9 @@
-import { types } from 'util';
-import { psychologist, user } from '../config/db/schema';
 import { RepositoryFactory } from '../factories/repositoryFactory';
 import { UserFactory } from '../factories/userFactory';
 import { tryCatchHelper } from '../helpers/tryCatchHelper';
-import { InstitutionRepository } from '../repositories/InstitutionRepository';
-import { PsychologistRepository } from '../repositories/PsychologistRepository';
-import { UserRepository } from '../repositories/UserRepository';
+import { InstitutionRepository } from '../repositories/institutionRepository';
+import { PsychologistRepository } from '../repositories/psychologistRepository';
+import { UserRepository } from '../repositories/userRepository';
 import { Institution, Psychologist, User } from '../types/user';
 
 export class UserService {
