@@ -62,10 +62,10 @@ export class PsychologistRepository
 				.leftJoin(user, eq(user.id, psychologist.id))
 				.where(eq(user.id, id));
 
-			if (!psychologistData[0]) throw new Error('Psychologist data not found');
+			if (!psychologistData) throw new Error('No psychologist data found');
 
 			if (psychologistData[0] && psychologistData[0].isActive !== true) {
-				throw new Error('The account is no longer active');
+				throw new Error('Psychologist not found');
 			}
 
 			const schedule = await db.query.scheduleAvailable.findMany({
