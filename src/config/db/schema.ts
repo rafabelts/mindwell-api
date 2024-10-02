@@ -115,7 +115,9 @@ export const review = sqliteTable('Review', {
 
 export const chat = sqliteTable('Chat', {
 	id: integer('id').primaryKey().notNull(),
-	userId: text('user_id').references(() => user.id),
+	userId: text('user_id')
+		.references(() => user.id)
+		.notNull(),
 	psychologistId: text('psychologist_id')
 		.references(() => psychologist.id)
 		.notNull(),

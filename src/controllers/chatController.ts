@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { ChatService } from '../services/chatService';
+import { chat, message } from '../config/db/schema';
 
 export class ChatController {
 	private chatService: ChatService;
@@ -23,6 +24,20 @@ export class ChatController {
 			);
 
 			return res.status(201).json({ message: 'Chat added' });
+		} catch (error) {
+			res.status(400).json({ message: error });
+		}
+	}
+
+	async getChats(req: Request, res: Response) {
+		try {
+			const { id } = req.params;
+
+			if (!id) return res.status(400).json({ message: 'User Id is missing' });
+
+			const chats = await this.chatService.getChats(id);
+
+			return res.status(200).json({ message: chats });
 		} catch (error) {
 			res.status(400).json({ message: error });
 		}

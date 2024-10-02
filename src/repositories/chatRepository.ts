@@ -16,6 +16,22 @@ export class ChatRepository implements ChatRepositoryInterface {
 		});
 	}
 
+	async getChats(userId: string, type: 'user' | 'psychologist') {
+		return tryCatchHelper(async () => {
+			if (!userId) throw new Error('Chat id is missing');
+
+			const typeId = type === 'user' ? 'userId' : 'psychologistId';
+
+			const chats = await db.query.chat.findMany({
+				where: (model, { eq }) => eq(model[typeId], userId),
+			});
+
+			if (!chats) throw new Error('No chats found');
+
+			return chats;
+		});
+	}
+
 	async addMessage(content: string, senderId: string, chatId: number) {
 		return tryCatchHelper(async () => {
 			if (!content) throw new Error('Content of the message is missing');
