@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { ChatService } from '../services/chatService';
-import { chat, message } from '../config/db/schema';
 
 export class ChatController {
 	private chatService: ChatService;
