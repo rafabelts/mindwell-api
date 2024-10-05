@@ -2,8 +2,7 @@ import { Institution, Psychologist, User } from '../types/user';
 import { CanBeUndefined } from '../types';
 
 export interface UserRepositoryInterface<
-	T extends User | Psychologist | Institution,
-> {
+	T extends User | Psychologist | Institution> {
 	addUser: (userData: T) => void;
 
 	getUserById: (id: string) => Promise<T | Array<T>>;

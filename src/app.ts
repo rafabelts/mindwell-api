@@ -11,9 +11,14 @@ import emotionalRecordRoutes from './routes/emotionalRecordRoutes';
 import { rateLimit } from './middlewares/rateLimiting';
 
 const app = express();
+const Stripe = require('stripe');
+const stripeKey = process.env.STRIPE_KEY;
+const stripe = new Stripe(stripeKey);
+
 const port = 8080;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Error handling
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
@@ -33,5 +38,6 @@ app.use('/api/review', reviewRoutes);
 app.use('/api/manage', profesionalManagmentRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/emotional-record', emotionalRecordRoutes);
+app.use('/api/stripe', stripe);
 
 app.listen(port);
