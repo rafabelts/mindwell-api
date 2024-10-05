@@ -38,5 +38,6 @@ app.use('/api/review', reviewRoutes);
 app.use('/api/manage', profesionalManagmentRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/emotional-record', emotionalRecordRoutes);
+app.use('/api/stripe', stripe);
 
 app.listen(port);
